@@ -64,15 +64,15 @@ const App = () => {
                 <li key={id}>
                   <input
                     type="checkbox"
-                    name=""
-                    id=""
+                    name={objeto}
+                    id={id}
                     checked={stored}
                     onChange={() => handleChecked(id)}
                   />
-                  <p className={stored && "line-throw"}>
+                  <p className={stored ? "line-throw" : ""}>
                     {qtde} {objeto}
                   </p>
-                  <p onClick={() => handleDelete(id)}>❌</p>
+                  <span onClick={() => handleDelete(id)}>❌</span>
                 </li>
               ))}
           </ul>

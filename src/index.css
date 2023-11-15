@@ -74,6 +74,7 @@ main > div > form > button {
   border: none;
   padding: 15px 20px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 main > div > ul {
@@ -91,6 +92,10 @@ main > div > ul > li {
 
 main > div > ul > li > p {
   margin: 0 5px;
+}
+
+main > div > ul > li > span {
+  cursor: pointer;
 }
 
 .line-throw {
