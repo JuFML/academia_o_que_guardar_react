@@ -1,0 +1,140 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: rgb(229, 195, 167);
+  height: 100vh;
+}
+
+body > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(46, 66, 116);
+  color: #cdb29f;
+  font-size: 30px;
+  height: 150px;
+}
+
+header > img {
+  width: 125px;
+  margin: 10px 10px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  justify-content: space-between;
+  flex: 1;
+}
+
+main > div > form {
+  background-color: #4b527e;
+  color: white;
+  font-size: 20px;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main > div > form > label {
+  margin-right: 10px;
+}
+
+main > div > form > input,
+main > div > form > select {
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #7d81ae;
+  border: none;
+  margin-right: 10px;
+  color: white;
+  outline: 0;
+}
+
+main > div > form > input::placeholder {
+  color: white;
+}
+
+main > div > form > select {
+  width: 80px;
+}
+
+main > div > form > button {
+  background-color: #ff6086;
+  color: white;
+  font-weight: bolder;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+
+main > div > ul {
+  justify-self: flex-start;
+}
+
+main > div > ul > li {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 15px;
+  color: #4b527e;
+  font-weight: bold;
+}
+
+main > div > ul > li > p {
+  margin: 0 5px;
+}
+
+.line-throw {
+  text-decoration: line-through;
+}
+
+main > .filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: end;
+  margin-bottom: 30px;
+}
+
+main > .filter > select {
+  background-color: #7d81ae;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 5px;
+  border: none;
+  outline: 0;
+  margin-right: 10px;
+  font-size: 10px;
+}
+
+main > .filter > button {
+  padding: 7px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ff854a;
+  color: white;
+  font-size: 10px;
+}
+
+footer {
+  /* position: fixed;
+  bottom: 0;
+  left: 0; */
+  background-color: #4b527e;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  height: 70px;
+}
