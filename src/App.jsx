@@ -21,10 +21,50 @@ const initialValue = [
   },
 ];
 
+const FormAddItem = ({ onHandleClickAddObjct }) => {
+  return (
+    <form onSubmit={onHandleClickAddObjct}>
+      <label>O que você precisa guardar?</label>
+      <select name="qtde" id="">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <input name="objeto" type="text" placeholder="Manda aqui" autoFocus />
+      <button>Adicionar</button>
+    </form>
+  );
+};
+
+const ListOfItems = ({ sortedItems, onChecked, onDelete }) => {
+  return (
+    <ul className="list">
+      {sortedItems.length > 0 &&
+        sortedItems.map(({ qtde, objeto, id, stored }) => (
+          <li key={id}>
+            <input
+              type="checkbox"
+              name={objeto}
+              id={id}
+              checked={stored}
+              onChange={() => onChecked(id)}
+            />
+            <p className={stored ? "line-throw" : ""}>
+              {qtde} {objeto}
+            </p>
+            <span onClick={() => onDelete(id)}>❌</span>
+          </li>
+        ))}
+    </ul>
+  );
+};
+
 const App = () => {
   const [listObjects, setListObjects] = useState(initialValue);
   const [orderBy, setOrderBy] = useState("recentes");
-  console.log(listObjects);
 
   const handleClickAddObjct = (e) => {
     e.preventDefault();
@@ -67,43 +107,13 @@ const App = () => {
 
       <main>
         <div className="upList">
-          <form onSubmit={(e) => handleClickAddObjct(e)}>
-            <label>O que você precisa guardar?</label>
-            <select name="qtde" id="">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-            </select>
-            <input
-              name="objeto"
-              type="text"
-              placeholder="Manda aqui"
-              autoFocus
-            />
-            <button>Adicionar</button>
-          </form>
+          <FormAddItem onHandleClickAddObjct={handleClickAddObjct} />
 
-          <ul className="list">
-            {sortedItems.length > 0 &&
-              sortedItems.map(({ qtde, objeto, id, stored }) => (
-                <li key={id}>
-                  <input
-                    type="checkbox"
-                    name={objeto}
-                    id={id}
-                    checked={stored}
-                    onChange={() => handleChecked(id)}
-                  />
-                  <p className={stored ? "line-throw" : ""}>
-                    {qtde} {objeto}
-                  </p>
-                  <span onClick={() => handleDelete(id)}>❌</span>
-                </li>
-              ))}
-          </ul>
+          <ListOfItems
+            sortedItems={sortedItems}
+            onChecked={handleChecked}
+            onDelete={handleDelete}
+          />
         </div>
 
         <div className="filter">
