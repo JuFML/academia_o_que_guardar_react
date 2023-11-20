@@ -39,7 +39,16 @@ const FormAddItem = ({ onHandleClickAddObjct }) => {
   );
 };
 
-const ListOfItems = ({ sortedItems, onChecked, onDelete }) => {
+const ListOfItems = ({ onChecked, onDelete, orderBy, listObjects }) => {
+  const sortedItems =
+    orderBy === "guardados"
+      ? listObjects.filter((item) => item.stored)
+      : orderBy === "alfabetica"
+      ? listObjects.toSorted((a, b) =>
+          a.objeto > b.objeto ? 1 : b.objeto > a.objeto ? -1 : 0
+        )
+      : listObjects;
+
   return (
     <ul className="list">
       {sortedItems.length > 0 &&
@@ -137,15 +146,6 @@ const App = () => {
     );
   };
 
-  const sortedItems =
-    orderBy === "guardados"
-      ? listObjects.filter((item) => item.stored)
-      : orderBy === "alfabetica"
-      ? listObjects.toSorted((a, b) =>
-          a.objeto > b.objeto ? 1 : b.objeto > a.objeto ? -1 : 0
-        )
-      : listObjects;
-
   return (
     <>
       <header>
@@ -158,7 +158,8 @@ const App = () => {
           <FormAddItem onHandleClickAddObjct={handleClickAddObjct} />
 
           <ListOfItems
-            sortedItems={sortedItems}
+            orderBy={orderBy}
+            listObjects={listObjects}
             onChecked={handleChecked}
             onDelete={handleDelete}
           />
