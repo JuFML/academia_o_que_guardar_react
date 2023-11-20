@@ -21,6 +21,15 @@ const initialValue = [
   },
 ];
 
+const Logo = () => {
+  return (
+    <header>
+      <img src="img/logo-espaco-mulher.png" alt="logo" />
+      <h1>Espaço Mulher</h1>
+    </header>
+  );
+};
+
 const FormAddItem = ({ onHandleClickAddObjct }) => {
   return (
     <form onSubmit={onHandleClickAddObjct}>
@@ -71,7 +80,7 @@ const ListOfItems = ({ onChecked, onDelete, orderBy, listObjects }) => {
   );
 };
 
-const Filters = ({ orderBy, onChangeOrder }) => {
+const Filters = ({ orderBy, onChangeOrder, onClearButton }) => {
   return (
     <div className="filter">
       <select
@@ -84,7 +93,7 @@ const Filters = ({ orderBy, onChangeOrder }) => {
         <option value="guardados">Ordenar por itens guardados</option>
         <option value="alfabetica">Ordenar por ordem alfabética</option>
       </select>
-      <button>Limpar lista</button>
+      <button onClick={onClearButton}>Limpar lista</button>
     </div>
   );
 };
@@ -138,6 +147,8 @@ const App = () => {
     setListObjects(() => newListObject);
   };
 
+  const handleClearList = () => setListObjects([]);
+
   const handleChecked = (id) => {
     setListObjects((prev) =>
       prev.map((item) =>
@@ -148,10 +159,7 @@ const App = () => {
 
   return (
     <>
-      <header>
-        <img src="img/logo-espaco-mulher.png" alt="logo" />
-        <h1>Espaço Mulher</h1>
-      </header>
+      <Logo />
 
       <main>
         <div className="upList">
@@ -165,7 +173,11 @@ const App = () => {
           />
         </div>
 
-        <Filters orderBy={orderBy} onChangeOrder={setOrderBy} />
+        <Filters
+          orderBy={orderBy}
+          onChangeOrder={setOrderBy}
+          onClearButton={handleClearList}
+        />
       </main>
 
       <Stats listObjects={listObjects} />
