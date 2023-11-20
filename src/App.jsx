@@ -1,7 +1,30 @@
 import { useState } from "react";
 
+const initialValue = [
+  {
+    qtde: 6,
+    objeto: "caneleiras",
+    id: crypto.randomUUID(),
+    stored: false,
+  },
+  {
+    qtde: 3,
+    objeto: "pesos",
+    id: crypto.randomUUID(),
+    stored: false,
+  },
+  {
+    qtde: 1,
+    objeto: "colchonete",
+    id: crypto.randomUUID(),
+    stored: false,
+  },
+];
+
 const App = () => {
-  const [listObjects, setListObjects] = useState([]);
+  const [listObjects, setListObjects] = useState(initialValue);
+  const [orderBy, setOrderBy] = useState("recentes");
+  console.log(listObjects);
 
   const handleClickAddObjct = (e) => {
     e.preventDefault();
@@ -29,6 +52,11 @@ const App = () => {
       )
     );
   };
+
+  const sortedItems =
+    orderBy === "guardados"
+      ? listObjects.filter((item) => item.stored)
+      : listObjects;
 
   return (
     <>
@@ -59,8 +87,8 @@ const App = () => {
           </form>
 
           <ul className="list">
-            {listObjects.length > 0 &&
-              listObjects.map(({ qtde, objeto, id, stored }) => (
+            {sortedItems.length > 0 &&
+              sortedItems.map(({ qtde, objeto, id, stored }) => (
                 <li key={id}>
                   <input
                     type="checkbox"
@@ -79,10 +107,15 @@ const App = () => {
         </div>
 
         <div className="filter">
-          <select name="filtro" id="">
-            <option value="Ordenar por mais recente">
-              Ordenar por mais recente
-            </option>
+          <select
+            value={orderBy}
+            name="filtro"
+            id=""
+            onChange={(e) => setOrderBy(e.target.value)}
+          >
+            <option value="recentes">Ordenar por mais recentes</option>
+            <option value="guardados">Ordenar por itens guardados</option>
+            <option value="alfabetica">Ordenar por ordem alfabética</option>
           </select>
           <button>Limpar lista</button>
         </div>
