@@ -114,6 +114,10 @@ const App = () => {
   const sortedItems =
     orderBy === "guardados"
       ? listObjects.filter((item) => item.stored)
+      : orderBy === "alfabetica"
+      ? listObjects.toSorted((a, b) =>
+          a.objeto > b.objeto ? 1 : b.objeto > a.objeto ? -1 : 0
+        )
       : listObjects;
 
   return (
