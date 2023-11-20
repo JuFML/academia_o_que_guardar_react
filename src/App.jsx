@@ -9,11 +9,35 @@ const Logo = () => {
   );
 };
 
-const FormAddItem = ({ onHandleClickAddObjct }) => {
+const FormAddItem = ({ setListObjects }) => {
+  const [inputValue, setInputValue] = useState("");
+  const [selectValue, setSelectValue] = useState("1");
+
+  const handleClickAddObjct = (e) => {
+    e.preventDefault();
+
+    setListObjects((l) => [
+      ...l,
+      {
+        qtde: +selectValue,
+        objeto: inputValue,
+        id: crypto.randomUUID(),
+        stored: false,
+      },
+    ]);
+
+    setInputValue("");
+    setSelectValue("1");
+  };
+
   return (
-    <form onSubmit={onHandleClickAddObjct}>
+    <form onSubmit={handleClickAddObjct}>
       <label>O que você precisa guardar?</label>
-      <select name="qtde" id="">
+      <select
+        value={selectValue}
+        onChange={(e) => setSelectValue(e.target.value)}
+        id=""
+      >
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -21,7 +45,13 @@ const FormAddItem = ({ onHandleClickAddObjct }) => {
         <option value="5">5</option>
         <option value="6">6</option>
       </select>
-      <input name="objeto" type="text" placeholder="Manda aqui" autoFocus />
+      <input
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        type="text"
+        placeholder="Manda aqui"
+        autoFocus
+      />
       <button>Adicionar</button>
     </form>
   );
@@ -107,20 +137,6 @@ const useListObjects = () => {
   const [listObjects, setListObjects] = useState([]);
   const [orderBy, setOrderBy] = useState("recentes");
 
-  const handleClickAddObjct = (e) => {
-    e.preventDefault();
-    const { qtde, objeto } = e.target.elements;
-    setListObjects((l) => [
-      ...l,
-      {
-        qtde: +qtde.value,
-        objeto: objeto.value,
-        id: crypto.randomUUID(),
-        stored: false,
-      },
-    ]);
-  };
-
   const handleDelete = (id) => {
     const newListObject = listObjects.filter((obj) => obj.id !== id);
     setListObjects(() => newListObject);
@@ -139,8 +155,8 @@ const useListObjects = () => {
   return {
     listObjects,
     orderBy,
+    setListObjects,
     setOrderBy,
-    handleClickAddObjct,
     handleDelete,
     handleClearList,
     handleChecked,
@@ -152,10 +168,10 @@ const App = () => {
     listObjects,
     orderBy,
     setOrderBy,
-    handleClickAddObjct,
     handleDelete,
     handleClearList,
     handleChecked,
+    setListObjects,
   } = useListObjects();
   return (
     <>
@@ -163,7 +179,7 @@ const App = () => {
 
       <main>
         <div className="upList">
-          <FormAddItem onHandleClickAddObjct={handleClickAddObjct} />
+          <FormAddItem setListObjects={setListObjects} />
 
           <ListOfItems
             orderBy={orderBy}
