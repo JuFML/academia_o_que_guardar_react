@@ -1,26 +1,5 @@
 import { useState } from "react";
 
-const initialValue = [
-  {
-    qtde: 6,
-    objeto: "caneleiras",
-    id: crypto.randomUUID(),
-    stored: false,
-  },
-  {
-    qtde: 3,
-    objeto: "pesos",
-    id: crypto.randomUUID(),
-    stored: false,
-  },
-  {
-    qtde: 1,
-    objeto: "colchonete",
-    id: crypto.randomUUID(),
-    stored: false,
-  },
-];
-
 const Logo = () => {
   return (
     <header>
@@ -124,8 +103,8 @@ const Stats = ({ listObjects }) => {
   );
 };
 
-const App = () => {
-  const [listObjects, setListObjects] = useState(initialValue);
+const useListObjects = () => {
+  const [listObjects, setListObjects] = useState([]);
   const [orderBy, setOrderBy] = useState("recentes");
 
   const handleClickAddObjct = (e) => {
@@ -157,6 +136,27 @@ const App = () => {
     );
   };
 
+  return {
+    listObjects,
+    orderBy,
+    setOrderBy,
+    handleClickAddObjct,
+    handleDelete,
+    handleClearList,
+    handleChecked,
+  };
+};
+
+const App = () => {
+  const {
+    listObjects,
+    orderBy,
+    setOrderBy,
+    handleClickAddObjct,
+    handleDelete,
+    handleClearList,
+    handleChecked,
+  } = useListObjects();
   return (
     <>
       <Logo />
