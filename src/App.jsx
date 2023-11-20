@@ -62,6 +62,24 @@ const ListOfItems = ({ sortedItems, onChecked, onDelete }) => {
   );
 };
 
+const Filters = ({ orderBy, onChangeOrder }) => {
+  return (
+    <div className="filter">
+      <select
+        value={orderBy}
+        name="filtro"
+        id=""
+        onChange={(e) => onChangeOrder(e.target.value)}
+      >
+        <option value="recentes">Ordenar por mais recentes</option>
+        <option value="guardados">Ordenar por itens guardados</option>
+        <option value="alfabetica">Ordenar por ordem alfabética</option>
+      </select>
+      <button>Limpar lista</button>
+    </div>
+  );
+};
+
 const App = () => {
   const [listObjects, setListObjects] = useState(initialValue);
   const [orderBy, setOrderBy] = useState("recentes");
@@ -116,19 +134,7 @@ const App = () => {
           />
         </div>
 
-        <div className="filter">
-          <select
-            value={orderBy}
-            name="filtro"
-            id=""
-            onChange={(e) => setOrderBy(e.target.value)}
-          >
-            <option value="recentes">Ordenar por mais recentes</option>
-            <option value="guardados">Ordenar por itens guardados</option>
-            <option value="alfabetica">Ordenar por ordem alfabética</option>
-          </select>
-          <button>Limpar lista</button>
-        </div>
+        <Filters orderBy={orderBy} onChangeOrder={setOrderBy} />
       </main>
       <footer>
         <p>Você tem 0 itens na lista</p>
