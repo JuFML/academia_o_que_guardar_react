@@ -19,11 +19,19 @@ header {
   color: #cdb29f;
   font-size: 30px;
   height: 150px;
+
+  @media (max-width: 400px) {
+    font-size: 25px;
+  }
 }
 
 header > img {
   width: 125px;
   margin: 10px 10px;
+
+  @media (max-width: 400px) {
+  width: 105px;
+  }
 }
 
 main {
@@ -42,14 +50,32 @@ main > div > form {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 660px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+main > div > form > div {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+
+main > div > form > div > button{
+  @media (max-width: 400px) {
+    margin-top: 10px;
+    width: 75%;
+  }
 }
 
 main > div > form > label {
   margin-right: 10px;
 }
 
-main > div > form > input,
-main > div > form > select {
+main > div > form input,
+main > div > form select {
   border-radius: 5px;
   padding: 15px;
   background-color: #7d81ae;
@@ -59,15 +85,15 @@ main > div > form > select {
   outline: 0;
 }
 
-main > div > form > input::placeholder {
+main > div > form input::placeholder {
   color: white;
 }
 
-main > div > form > select {
+main > div > form select {
   width: 80px;
 }
 
-main > div > form > button {
+main > div > form button {
   background-color: #ff6086;
   color: white;
   font-weight: bolder;
@@ -142,4 +168,8 @@ footer {
   color: white;
   font-size: 20px;
   height: 70px;
+}
+
+footer > p {
+  text-align: center;
 }
